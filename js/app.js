@@ -1,14 +1,28 @@
-/*
- * Create a list that holds all of your cards
- */
+
+ // Create a list that holds all of your cards
+
+ var cards = [...document.querySelectorAll(".card")];
+ var clickedCards=[];
+ // Adding an event listener to each card.
+ cards.map(i => {
+   i.addEventListener('click', displayCards);
+ });
+
+ // * Display the cards on the page
+ function displayCards() {
+   this.classList.add('open', 'show', 'disabled');
+   clickedCards.push(this);
+ }
+ //  shuffle the list of cards using the provided "shuffle" method
+ var deck = document.querySelector(".deck");
+   var cardShuffle = shuffle(cards);
+   for (i in cardShuffle) {
+     [].forEach.call(cards, function (items) {
+       deck.appendChild(items);
+     });
+   }
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
