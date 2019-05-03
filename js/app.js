@@ -10,7 +10,7 @@ cards.map(i => {
 
 var timeStatus = true;
 
-// * Display the cards on the page
+//  Display the cards on the page
 function displayCards() {
   if (timeStatus == true) {
     timeStatus = false;
@@ -33,7 +33,7 @@ for (i in cardShuffle) {
 function cardsMatched() {
   moveCounter();
   setTimeout(function() {
-    if (clickedCards.length == 2) {
+    if (clickedCards.length === 2) {
       if (clickedCards[0].children[0].classList.item(1) === clickedCards[1].children[0].classList.item(1)) {
         clickedCards.map(i => {
           i.classList.add('match');
