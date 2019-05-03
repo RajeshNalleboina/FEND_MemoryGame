@@ -1,13 +1,15 @@
 // Create a list that holds all of your cards
-
 var cards = [...document.querySelectorAll(".card")];
+// store the open cards
 var clickedCards = [];
+
 // Adding an event listener to each card.
 cards.map(i => {
   i.addEventListener('click', displayCards);
 });
 
 var timeStatus= true;
+
 // * Display the cards on the page
 function displayCards() {
   if (timeStatus==true) {
@@ -45,7 +47,7 @@ function cardsMatched() {
       }
       clickedCards = [];
     }
-  }, 180);
+  }, 200);
 }
 
 // moves
@@ -54,12 +56,14 @@ function moveCounter() {
   moves=move.innerHTML;
   moves++;
   move.innerHTML=moves;
+starRating();
 }
 
 // timer Creation
 var timer=document.querySelector('.timer');
-var sec=0,
-mins=0;
+var sec=00,
+mins=00,
+hours=00;
 function timerCreation() {
   timerInterval = setInterval(function() {
   sec++;
@@ -67,10 +71,53 @@ function timerCreation() {
     mins++;
     sec=0;
   }
-  timer.innerHTML=mins + " : "+sec;
+  if (mins==60) {
+    mins=0;
+    hours++;
+  }
+  timer.innerHTML=hours+ " : "+mins + " : "+sec;
 },1000);
 }
 
+// Stars Rating
+var stars=[...document.querySelectorAll('.fa-star')];
+function starRating() {
+  if (moves==18) {
+    stars[2].classList.add('fa-star-o');
+    stars[2].classList.remove('fa-star');
+  }
+  else if (moves==35) {
+    stars[1].classList.add('fa-star-o');
+    stars[1].classList.remove('fa-star');
+  }
+}
+
+// Game Over
+var matchCount=0;
+function gameOver() {
+  matchCount++;
+  var starsLength=document.querySelectorAll('.fa-star').length;
+  var starsData="";
+  while (starsLength -- > 0) {
+    starsData+='<i class="fa fa-star">';
+  }
+
+  if (matchCount==2) {
+    clearInterval(timerInterval);
+    swal({
+      title:'Congratulation..!',
+      html: "Total Moves : <b>" + move.innerHTML + "</b><br>  Wow! you are completed the game with in short time : <b>" + timer.innerHTML + " sec </b><br> You have erned : " + starsData,
+      confirmButtonText: 'Do you want to play again.!'
+    }).then(function(){
+      reload();
+    });
+  }
+}
+
+// reload
+function reload() {
+  window.location.reload();
+}
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
   var currentIndex = array.length,
