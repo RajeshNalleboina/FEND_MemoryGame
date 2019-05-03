@@ -108,8 +108,8 @@ function gameOver() {
   if (matchCount == 8) {
     clearInterval(timerInterval);
     swal({
-      title: 'Congratulation..!',
-      html: "Total Moves : <b>" + move.innerHTML + "</b><br>  Wow! you are completed the game with in short time : <b>" + timer.innerHTML + " sec </b><br> You have erned : " + starsData,
+      title: 'Congratulations..!',
+      html: "Total Moves : <b>" + move.innerHTML + "</b><br>  Wow! you have completed the game within short time : <b>" + timer.innerHTML + " sec </b><br> You have earned : " + starsData,
       confirmButtonText: 'Do you want to play again.!'
     }).then(function() {
       reload();
