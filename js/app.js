@@ -36,13 +36,13 @@ function cardsMatched() {
     if (clickedCards.length === 2) {
       if (clickedCards[0].children[0].classList.item(1) === clickedCards[1].children[0].classList.item(1)) {
         clickedCards.map(i => {
-          i.classList.add('match');
+          i.classList.add('match','disabled');
           i.classList.remove('open', 'show');
         });
         gameOver();
       } else {
         clickedCards.map(i => {
-          i.classList.remove('open', 'show', 'disabled');
+          i.classList.remove('open', 'show', 'disabled', 'match');
         });
       }
       clickedCards = [];
