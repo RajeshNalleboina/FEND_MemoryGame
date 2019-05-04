@@ -113,7 +113,30 @@ h1 {
 }
 
 /* Media Queries for mobile view */
-@media only screen and (max-width:780px) {
+@media only screen and (max-width:480px) {
+  .deck {
+    width: 90%;
+    min-height: 0;
+    height: auto;
+    padding: 1em;
+    margin: 1% auto;
+  }
+
+  .deck .card {
+    height: 90px;
+    width: 23%;
+    margin: 0 0 1% 0;
+  }
+
+  .score-panel {
+    text-align: left;
+    width: 305px;
+    margin-bottom: 10px;
+  }
+}
+
+/* Media Queries for mobile view */
+@media only screen and (min-width:481px) and (max-width:780px) {
   .deck {
     width: 90%;
     min-height: 0;
