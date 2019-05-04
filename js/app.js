@@ -1,7 +1,9 @@
 // Create a list that holds all of your cards
-var cards = [...document.querySelectorAll(".card")];
+var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
 // store the open cards
 var clickedCards = [];
+let matchedCards = document.getElementsByClassName("match");
+
 
 // Adding an event listener to each card.
 cards.map(i => {
@@ -16,18 +18,22 @@ function displayCards() {
     timeStatus = false;
     timerCreation();
   }
-  this.classList.add('open', 'show', 'disabled');
-  clickedCards.push(this);
-  cardsMatched();
+  // chechk the condition
+  if (!this.classList.contains('open') && clickedCards.length< 2) {
+    this.classList.add('open', 'show', 'disabled');
+    clickedCards.push(this);
+    cardsMatched();
+  }
 }
+
 //  shuffle the list of cards using the provided "shuffle" method
 var deck = document.querySelector(".deck");
 var cardShuffle = shuffle(cards);
-for (i in cardShuffle) {
-  [].forEach.call(cards, function(items) {
-    deck.appendChild(items);
-  });
-}
+ cardShuffle.map(()=>{
+   [].filter.call(cards, function(items) {
+     deck.appendChild(items);
+   });
+});
 
 // Matching the cards
 function cardsMatched() {
@@ -38,16 +44,18 @@ function cardsMatched() {
         clickedCards.map(i => {
           i.classList.add('match','disabled');
           i.classList.remove('open', 'show');
+          clickedCards = [];
         });
         gameOver();
       } else {
         clickedCards.map(i => {
-          i.classList.remove('open', 'show', 'disabled', 'match');
+            i.classList.remove('open', 'show', 'disabled', 'match');
         });
       }
       clickedCards = [];
+
     }
-  }, 200);
+  }, 500);
 }
 
 // moves
@@ -62,9 +70,9 @@ function moveCounter() {
 
 // timer Creation
 var timer = document.querySelector('.timer');
-var sec = 00,
-  mins = 00,
-  hours = 00;
+var sec = 0,
+  mins = 0,
+  hours = 0;
 
 function timerCreation() {
   timerInterval = setInterval(function() {
